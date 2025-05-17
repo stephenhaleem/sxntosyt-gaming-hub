@@ -18,7 +18,9 @@ const Index = () => {
     const parallaxElements = document.querySelectorAll('.parallax-layer');
     
     parallaxElements.forEach((element) => {
-      const depth = element.getAttribute('data-depth') || 0.2;
+      const depthAttr = element.getAttribute('data-depth');
+      // Convert the attribute to a number or use default
+      const depth = depthAttr ? parseFloat(depthAttr) : 0.2;
       
       gsap.to(element, {
         y: `${depth * 100}%`,
@@ -37,13 +39,17 @@ const Index = () => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
         
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80, // Adjusted for navbar height
-            behavior: 'smooth'
-          });
+        // Check if targetId is not just "#" before trying to query for it
+        if (targetId && targetId !== '#') {
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80, // Adjusted for navbar height
+              behavior: 'smooth'
+            });
+          }
         }
       });
     });
