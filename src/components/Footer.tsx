@@ -42,7 +42,11 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
             <div className="flex items-center gap-2 mb-2">
-              <Gamepad size={24} className="text-gaming-purple" />
+              <img 
+                src="/lovable-uploads/137cdb32-069d-4cda-99c0-5f6dbda372a7.png" 
+                alt="Santos" 
+                className="h-10 w-10 rounded-full border border-gaming-purple/50" 
+              />
               <h3 className="text-2xl font-futuristic font-bold glow-text">SxntosYT</h3>
             </div>
             <p className="text-gray-400 flex items-center gap-2">

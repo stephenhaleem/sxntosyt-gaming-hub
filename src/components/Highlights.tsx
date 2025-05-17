@@ -44,32 +44,38 @@ const Highlights = () => {
   ];
 
   useEffect(() => {
-    // GSAP animations
+    // Improve GSAP animations performance
     const cards = cardsRef.current;
     
-    // Stagger animation for cards
-    gsap.fromTo(cards,
+    // Use a single timeline for better performance
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 70%",
+        once: true // Only trigger once to prevent lag on scroll
+      }
+    });
+    
+    // Add animations to the timeline
+    tl.fromTo(cards,
       { 
-        y: 100, 
+        y: 50, // Reduced amount of movement for better performance
         opacity: 0 
       },
       { 
         y: 0, 
         opacity: 1, 
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-        }
+        duration: 0.7, // Faster animation
+        stagger: 0.15, // Reduced stagger time
+        ease: "power2.out" // Simpler easing function
       }
     );
     
-    // Card hover effects (GSAP isn't needed for this, using CSS)
-    
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      // Kill scroll triggers when component unmounts
+      if (tl.scrollTrigger) {
+        tl.scrollTrigger.kill();
+      }
     };
   }, []);
 
@@ -79,10 +85,8 @@ const Highlights = () => {
       id="highlights" 
       className="py-20 relative overflow-hidden"
     >
-      {/* Tactical background with diagonal lines */}
+      {/* COD-style background */}
       <div className="absolute inset-0 bg-[linear-gradient(60deg,transparent_40%,rgba(139,92,246,0.1)_40%,rgba(139,92,246,0.1)_60%,transparent_60%)] bg-[length:200px_200px]"></div>
-      
-      {/* Hexagon pattern */}
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519751138087-5bf79df62d5b')] bg-cover opacity-5"></div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -112,6 +116,7 @@ const Highlights = () => {
                   src={highlight.image} 
                   alt={highlight.title} 
                   className="highlight-image"
+                  loading="lazy" // Add lazy loading for better performance
                 />
                 
                 {/* Play overlay */}
@@ -119,7 +124,7 @@ const Highlights = () => {
                   href={highlight.videoLink}
                   className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
                 >
-                  <div className="w-16 h-16 rounded-full bg-gaming-purple/80 flex items-center justify-center animate-pulse-glow transform group-hover:scale-110 transition-transform">
+                  <div className="w-16 h-16 rounded-full bg-gaming-purple/80 flex items-center justify-center transform group-hover:scale-110 transition-transform">
                     <Play size={24} className="text-white" />
                   </div>
                 </a>
@@ -163,15 +168,13 @@ const Highlights = () => {
         
         <div className="text-center mt-16">
           <div className="inline-block relative">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-gaming-purple via-gaming-blue to-gaming-purple rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
             <a 
               href="https://www.youtube.com/@sxntosyt" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="relative btn-gaming group"
+              className="inline-block px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-black font-futuristic font-bold uppercase tracking-wider transition-all hover:-translate-y-1"
             >
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-gaming-purple to-gaming-blue rounded-md blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></span>
-              <span className="relative">View More on YouTube</span>
+              View More on YouTube
             </a>
           </div>
         </div>

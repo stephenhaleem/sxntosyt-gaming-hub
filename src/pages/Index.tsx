@@ -14,7 +14,23 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
   useEffect(() => {
-    // Initialize page-level GSAP animations
+    // Create parallax effect for background elements
+    const parallaxElements = document.querySelectorAll('.parallax-layer');
+    
+    parallaxElements.forEach((element) => {
+      const depth = element.getAttribute('data-depth') || 0.2;
+      
+      gsap.to(element, {
+        y: `${depth * 100}%`,
+        ease: "none",
+        scrollTrigger: {
+          trigger: element.parentElement,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        }
+      });
+    });
     
     // Smoother scrolling for page navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -30,6 +46,26 @@ const Index = () => {
           });
         }
       });
+    });
+    
+    // Initialize a timeline for page load animations
+    const tl = gsap.timeline();
+    
+    // Animate the navbar from top
+    tl.fromTo(
+      "nav",
+      { y: -100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+    );
+    
+    // Add some subtle movement to hero elements for a dynamic feel
+    gsap.to(".hero-element", {
+      y: 10,
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      stagger: 0.2
     });
     
     return () => {

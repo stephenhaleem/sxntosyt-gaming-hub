@@ -45,7 +45,7 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a 
@@ -54,7 +54,11 @@ const Navbar = () => {
             onMouseEnter={playHoverSound}
             onClick={playClickSound}
           >
-            <Gamepad size={24} className="text-gaming-purple" />
+            <img 
+              src="/lovable-uploads/137cdb32-069d-4cda-99c0-5f6dbda372a7.png" 
+              alt="Santos" 
+              className="h-10 w-10 rounded-full border border-gaming-purple/50" 
+            />
             <span className="glow-text">SxntosYT</span>
           </a>
           
@@ -69,13 +73,22 @@ const Navbar = () => {
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
-            <NavItem href="#home" icon={Trophy} label="Home" onHover={playHoverSound} onClick={playClickSound} />
-            <NavItem href="#highlights" icon={Gamepad} label="Highlights" onHover={playHoverSound} onClick={playClickSound} />
-            <NavItem href="#social" icon={Users} label="Social" onHover={playHoverSound} onClick={playClickSound} />
-            <NavItem href="#contact" icon={MessageSquare} label="Contact" onHover={playHoverSound} onClick={playClickSound} />
-            <NavItem href="#cod-points" icon={CreditCard} label="COD Points" onHover={playHoverSound} onClick={playClickSound} highlight />
+          {/* Desktop Navigation - COD style */}
+          <div className="hidden md:flex items-center">
+            <div className="flex space-x-1">
+              <NavItem href="#home" label="HOME" onHover={playHoverSound} onClick={playClickSound} />
+              <NavItem href="#highlights" label="HIGHLIGHTS" onHover={playHoverSound} onClick={playClickSound} />
+              <NavItem href="#social" label="SOCIAL" onHover={playHoverSound} onClick={playClickSound} />
+              <NavItem href="#contact" label="CONTACT" onHover={playHoverSound} onClick={playClickSound} />
+            </div>
+            
+            {/* COD Points button styled like the COD store button */}
+            <NavItemHighlight 
+              href="#cod-points" 
+              label="COD-M STORE" 
+              onHover={playHoverSound} 
+              onClick={playClickSound} 
+            />
           </div>
         </div>
         
@@ -83,14 +96,13 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md border-b border-gaming-purple/20 md:hidden">
             <div className="flex flex-col space-y-4 p-6">
-              <MobileNavItem href="#home" icon={Trophy} label="Home" onClick={() => {setIsMenuOpen(false); playClickSound();}} />
-              <MobileNavItem href="#highlights" icon={Gamepad} label="Highlights" onClick={() => {setIsMenuOpen(false); playClickSound();}} />
-              <MobileNavItem href="#social" icon={Users} label="Social" onClick={() => {setIsMenuOpen(false); playClickSound();}} />
-              <MobileNavItem href="#contact" icon={MessageSquare} label="Contact" onClick={() => {setIsMenuOpen(false); playClickSound();}} />
+              <MobileNavItem href="#home" label="HOME" onClick={() => {setIsMenuOpen(false); playClickSound();}} />
+              <MobileNavItem href="#highlights" label="HIGHLIGHTS" onClick={() => {setIsMenuOpen(false); playClickSound();}} />
+              <MobileNavItem href="#social" label="SOCIAL" onClick={() => {setIsMenuOpen(false); playClickSound();}} />
+              <MobileNavItem href="#contact" label="CONTACT" onClick={() => {setIsMenuOpen(false); playClickSound();}} />
               <MobileNavItem 
                 href="#cod-points" 
-                icon={CreditCard} 
-                label="COD Points" 
+                label="COD-M STORE" 
                 onClick={() => {setIsMenuOpen(false); playClickSound();}}
                 highlight
               />
@@ -102,33 +114,38 @@ const Navbar = () => {
   );
 };
 
-const NavItem = ({ href, icon: Icon, label, onHover, onClick, highlight = false }) => (
+const NavItem = ({ href, label, onHover, onClick }) => (
   <a 
     href={href} 
-    className={`flex items-center px-4 py-2 rounded-md transition-colors sound-hover sound-click ${
-      highlight 
-        ? "text-white bg-gaming-purple hover:bg-gaming-purple/80" 
-        : "text-gray-300 hover:text-white hover:bg-white/10"
-    }`}
+    className="uppercase tracking-wider font-futuristic px-4 py-2 text-gray-300 hover:text-white transition-colors sound-hover sound-click"
     onMouseEnter={onHover}
     onClick={onClick}
   >
-    <Icon size={16} className="mr-1" />
     {label}
   </a>
 );
 
-const MobileNavItem = ({ href, icon: Icon, label, onClick, highlight = false }) => (
+const NavItemHighlight = ({ href, label, onHover, onClick }) => (
   <a 
     href={href} 
-    className={`flex items-center gap-2 p-3 rounded-md transition-all ${
+    className="ml-4 uppercase tracking-wider font-futuristic px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-black font-bold transition-colors sound-hover sound-click"
+    onMouseEnter={onHover}
+    onClick={onClick}
+  >
+    {label}
+  </a>
+);
+
+const MobileNavItem = ({ href, label, onClick, highlight = false }) => (
+  <a 
+    href={href} 
+    className={`uppercase tracking-wider font-futuristic p-3 rounded-md transition-all ${
       highlight 
-        ? "text-white bg-gaming-purple hover:bg-gaming-purple/80" 
+        ? "text-black bg-yellow-400 hover:bg-yellow-500 font-bold" 
         : "text-gray-300 hover:text-white hover:bg-white/10"
     }`}
     onClick={onClick}
   >
-    <Icon size={18} />
     {label}
   </a>
 );
