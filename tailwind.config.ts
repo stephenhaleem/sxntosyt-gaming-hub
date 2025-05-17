@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				gaming: {
+					'purple': '#8B5CF6', 
+					'blue': '#3B82F6',
+					'pink': '#EC4899',
+					'dark': '#121212',
+					'neon': '#00F5FF'
 				}
 			},
 			borderRadius: {
@@ -84,11 +92,40 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'glow': {
+					'0%, 100%': { 
+						textShadow: '0 0 5px #8B5CF6, 0 0 15px #8B5CF6, 0 0 20px #8B5CF6'
+					},
+					'50%': { 
+						textShadow: '0 0 10px #3B82F6, 0 0 20px #3B82F6, 0 0 30px #3B82F6'
+					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'pulse-glow': {
+					'0%, 100%': { boxShadow: '0 0 5px #8B5CF6, 0 0 10px #8B5CF6' },
+					'50%': { boxShadow: '0 0 15px #8B5CF6, 0 0 20px #8B5CF6' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'glow': 'glow 2s ease-in-out infinite',
+				'float': 'float 3s ease-in-out infinite',
+				'pulse-glow': 'pulse-glow 2s ease-in-out infinite'
+			},
+			fontFamily: {
+				'gaming': ['Play', 'sans-serif'],
+				'futuristic': ['Orbitron', 'sans-serif']
+			},
+			backgroundImage: {
+				'hero-pattern': 'linear-gradient(to bottom right, rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.9)), url("https://images.unsplash.com/photo-1605810230434-7631ac76ec81")',
+				'purple-gradient': 'linear-gradient(to right, #8B5CF6, #6366F1)',
+				'neon-grid': 'linear-gradient(#000 0.1px, transparent 0.1px), linear-gradient(to right, #000 0.1px, #090a1a 0.1px)',
+				'glow-ring': 'radial-gradient(circle, rgba(139, 92, 246, 0.8) 0%, rgba(30, 41, 59, 0) 70%)'
 			}
 		}
 	},
