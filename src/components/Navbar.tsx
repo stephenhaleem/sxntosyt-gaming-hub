@@ -2,6 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, Gamepad, Trophy, Users, MessageSquare, CreditCard } from "lucide-react";
 import { useSoundContext } from "@/contexts/SoundContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,13 +45,15 @@ const Navbar = () => {
 
   return (
     <nav 
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? "backdrop-blur-md bg-black/80 border-b border-gaming-purple/30" 
-          : "bg-transparent"
-      }`}
+      className={`fixed w-full top-0 z-50 transition-all duration-300 flex justify-center pt-4 px-4`}
     >
-      <div className="container mx-auto px-4 py-3">
+      <div 
+        className={`max-w-5xl w-full rounded-xl px-4 py-3 transition-all duration-300 ${
+          scrolled 
+            ? "backdrop-blur-md bg-black/80 border border-gaming-purple/30 shadow-lg shadow-gaming-purple/10" 
+            : "bg-black/40 backdrop-blur-sm border border-white/10"
+        }`}
+      >
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a 
@@ -78,8 +86,39 @@ const Navbar = () => {
             <div className="flex space-x-1">
               <NavItem href="#home" label="HOME" onHover={playHoverSound} onClick={playClickSound} />
               <NavItem href="#highlights" label="HIGHLIGHTS" onHover={playHoverSound} onClick={playClickSound} />
-              <NavItem href="#social" label="SOCIAL" onHover={playHoverSound} onClick={playClickSound} />
-              <NavItem href="#contact" label="CONTACT" onHover={playHoverSound} onClick={playClickSound} />
+              
+              {/* Dropdown Menu */}
+              <DropdownMenu>
+                <DropdownMenuTrigger 
+                  className="uppercase tracking-wider font-futuristic px-4 py-2 text-gray-300 hover:text-white transition-colors flex items-center gap-2"
+                  onMouseEnter={playHoverSound}
+                  onClick={playClickSound}
+                >
+                  MORE <ChevronDown size={16} />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="bg-black/90 border border-gaming-purple/30 text-white backdrop-blur-md">
+                  <DropdownMenuItem 
+                    className="hover:bg-gaming-purple/20 focus:bg-gaming-purple/20 cursor-pointer flex items-center gap-2"
+                    onSelect={() => {
+                      window.location.href = "#social";
+                      playClickSound();
+                    }}
+                  >
+                    <Users size={16} />
+                    SOCIAL
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    className="hover:bg-gaming-purple/20 focus:bg-gaming-purple/20 cursor-pointer flex items-center gap-2"
+                    onSelect={() => {
+                      window.location.href = "#contact";
+                      playClickSound();
+                    }}
+                  >
+                    <MessageSquare size={16} />
+                    CONTACT
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
             
             {/* COD Points button styled like the COD store button */}
@@ -94,7 +133,7 @@ const Navbar = () => {
         
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md border-b border-gaming-purple/20 md:hidden">
+          <div className="absolute top-full left-0 right-0 mt-2 mx-4 bg-black/95 backdrop-blur-md border border-gaming-purple/20 rounded-lg md:hidden">
             <div className="flex flex-col space-y-4 p-6">
               <MobileNavItem href="#home" label="HOME" onClick={() => {setIsMenuOpen(false); playClickSound();}} />
               <MobileNavItem href="#highlights" label="HIGHLIGHTS" onClick={() => {setIsMenuOpen(false); playClickSound();}} />

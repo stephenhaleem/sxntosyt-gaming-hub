@@ -57,13 +57,13 @@ const Hero = () => {
       id="home" 
       className="relative min-h-screen flex items-center py-20 pt-24 overflow-hidden"
     >
-      {/* Background with CoD Mobile theme */}
+      {/* COD-Inspired Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1563089145-599997674d42')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-gradient-to-t from-gaming-dark via-gaming-dark/80 to-transparent" />
         <div ref={overlayRef} className="absolute inset-0">
           {/* Military pattern overlay */}
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1561059510-7c9f89a13337')] bg-cover opacity-10"></div>
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1561059510-7c9f89a13337')] bg-cover opacity-10 parallax-layer" data-depth="0.2"></div>
         </div>
         
         {/* Tactical HUD elements */}
