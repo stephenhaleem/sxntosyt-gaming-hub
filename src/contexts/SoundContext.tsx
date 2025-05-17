@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 interface SoundContextType {
@@ -10,26 +9,28 @@ interface SoundContextType {
 
 const SoundContext = createContext<SoundContextType | undefined>(undefined);
 
-export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [soundEnabled, setSoundEnabled] = useState(() => {
     const saved = localStorage.getItem("soundEnabled");
     return saved !== null ? JSON.parse(saved) : false;
   });
-  
+
   const [hoverSound, setHoverSound] = useState<HTMLAudioElement | null>(null);
   const [clickSound, setClickSound] = useState<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     // Create audio elements once the component mounts
-    const hover = new Audio("/sounds/hover.mp3");
-    const click = new Audio("/sounds/click.mp3");
-    
+    const hover = new Audio("public/sounds/hover-button-287656.mp3");
+    const click = new Audio("public/sounds/click-21156.mp3");
+
     hover.volume = 0.3;
     click.volume = 0.4;
-    
+
     setHoverSound(hover);
     setClickSound(click);
-    
+
     return () => {
       // Cleanup
       hover.pause();
@@ -49,14 +50,18 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const playHoverSound = () => {
     if (soundEnabled && hoverSound) {
       hoverSound.currentTime = 0;
-      hoverSound.play().catch(e => console.error("Error playing hover sound:", e));
+      hoverSound
+        .play()
+        .catch((e) => console.error("Error playing hover sound:", e));
     }
   };
 
   const playClickSound = () => {
     if (soundEnabled && clickSound) {
       clickSound.currentTime = 0;
-      clickSound.play().catch(e => console.error("Error playing click sound:", e));
+      clickSound
+        .play()
+        .catch((e) => console.error("Error playing click sound:", e));
     }
   };
 
