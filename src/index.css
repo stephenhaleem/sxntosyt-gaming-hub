@@ -69,7 +69,7 @@
   }
   
   .card-gaming {
-    @apply rounded-lg bg-secondary/50 backdrop-blur-sm border border-gaming-purple/20 hover:border-gaming-purple/50 transition-all duration-300;
+    @apply rounded-lg bg-secondary/50 backdrop-blur-sm border border-gaming-purple/20 hover:border-gaming-purple/50 transition-all duration-300 hover:shadow-[0_0_15px_rgba(139,92,246,0.3)];
   }
 
   .highlight-image {
@@ -79,4 +79,53 @@
   .section-title {
     @apply text-3xl md:text-4xl font-futuristic font-bold mb-8 glow-text;
   }
+
+  /* Electric effects */
+  .electric-border {
+    @apply relative;
+  }
+
+  .electric-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg -z-10 bg-gradient-to-r from-gaming-purple via-gaming-blue to-gaming-pink opacity-0 transition-opacity duration-300;
+    filter: blur(8px);
+  }
+
+  .electric-border:hover::before {
+    @apply opacity-100;
+  }
+  
+  .sound-hover, .sound-click {
+    @apply cursor-pointer transition-all duration-200;
+  }
+  
+  .sound-hover:hover {
+    @apply text-gaming-purple scale-105;
+  }
+}
+
+@keyframes electric-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.9);
+  }
+}
+
+@keyframes subtle-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.electric-pulse {
+  animation: electric-pulse 2s infinite;
+}
+
+.subtle-float {
+  animation: subtle-float 3s ease-in-out infinite;
 }

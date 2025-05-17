@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Youtube, Twitch, Instagram, Discord, Telegram, Whatsapp, Link } from "lucide-react";
+import { Youtube, Twitch, MessageSquare, SquareUser, Send, Phone, Link } from "lucide-react";
 
 const Social = () => {
   const socialLinks = [
@@ -28,21 +28,21 @@ const Social = () => {
     {
       name: "Discord",
       url: "https://discord.gg/sxntosyt",
-      icon: Discord,
+      icon: MessageSquare,
       color: "from-indigo-500 to-indigo-700",
       description: "Join my gaming community"
     },
     {
       name: "Telegram",
       url: "https://t.me/sxntosyt",
-      icon: Telegram,
+      icon: Send,
       color: "from-blue-400 to-blue-600",
       description: "News & updates"
     },
     {
       name: "WhatsApp",
       url: "https://whatsapp.com/channel/sxntosyt",
-      icon: Whatsapp,
+      icon: Phone,
       color: "from-green-500 to-green-700",
       description: "Fan group"
     }
@@ -60,7 +60,7 @@ const Social = () => {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="card-gaming p-6 flex flex-col items-center hover:transform hover:scale-105 transition-all"
+              className="card-gaming p-6 flex flex-col items-center hover:transform hover:scale-105 transition-all sound-hover"
             >
               <div className={`social-icon mb-4 bg-gradient-to-br ${social.color}`}>
                 <social.icon size={24} />

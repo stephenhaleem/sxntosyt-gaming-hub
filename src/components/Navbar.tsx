@@ -8,13 +8,13 @@ const Navbar = () => {
   return (
     <nav className="fixed w-full top-0 z-50 backdrop-blur-md bg-black/50 border-b border-gaming-purple/20">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <a href="#" className="text-2xl font-futuristic font-bold glow-text tracking-wider">
+        <a href="#" className="text-2xl font-futuristic font-bold glow-text tracking-wider sound-hover">
           SxntosYT
         </a>
         
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-white"
+          className="md:hidden text-white sound-click"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <Menu size={24} />
@@ -22,16 +22,16 @@ const Navbar = () => {
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#home" className="text-white hover:text-gaming-purple transition-colors">
+          <a href="#home" className="text-white hover:text-gaming-purple transition-colors sound-hover sound-click">
             Home
           </a>
-          <a href="#highlights" className="text-white hover:text-gaming-purple transition-colors">
+          <a href="#highlights" className="text-white hover:text-gaming-purple transition-colors sound-hover sound-click">
             Highlights
           </a>
-          <a href="#social" className="text-white hover:text-gaming-purple transition-colors">
+          <a href="#social" className="text-white hover:text-gaming-purple transition-colors sound-hover sound-click">
             Social
           </a>
-          <a href="#contact" className="text-white hover:text-gaming-purple transition-colors">
+          <a href="#contact" className="text-white hover:text-gaming-purple transition-colors sound-hover sound-click">
             Contact
           </a>
         </div>
@@ -42,28 +42,28 @@ const Navbar = () => {
             <div className="flex flex-col space-y-4 p-6">
               <a 
                 href="#home" 
-                className="text-white hover:text-gaming-purple transition-colors"
+                className="text-white hover:text-gaming-purple transition-colors sound-hover sound-click"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </a>
               <a 
                 href="#highlights" 
-                className="text-white hover:text-gaming-purple transition-colors"
+                className="text-white hover:text-gaming-purple transition-colors sound-hover sound-click"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Highlights
               </a>
               <a 
                 href="#social" 
-                className="text-white hover:text-gaming-purple transition-colors"
+                className="text-white hover:text-gaming-purple transition-colors sound-hover sound-click"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Social
               </a>
               <a 
                 href="#contact" 
-                className="text-white hover:text-gaming-purple transition-colors"
+                className="text-white hover:text-gaming-purple transition-colors sound-hover sound-click"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
