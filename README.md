@@ -75,4 +75,3 @@ For questions, suggestions, or support, open an issue or contact [stephenhaleem]
 
 ---
 
-> _Update this `.readmea` file with more specific information as the project develops!_
