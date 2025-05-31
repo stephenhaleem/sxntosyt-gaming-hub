@@ -22,8 +22,8 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     // Create audio elements once the component mounts
-    const hover = new Audio("public/sounds/hover-button-287656.mp3");
-    const click = new Audio("public/sounds/click-21156.mp3");
+    const hover = new Audio("/sounds/hover-button-287656.mp3");
+    const click = new Audio("/sounds/click-21156.mp3");
 
     hover.volume = 0.3;
     click.volume = 0.4;

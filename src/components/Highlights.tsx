@@ -14,7 +14,7 @@ const Highlights = () => {
       id: 1,
       title: "20 Kill Victory Royale",
       game: "Call of Duty Mobile",
-      image: "Screenshot 2025-05-17 200406.png",
+      image: "/images/Screenshot 2025-05-17 200406.png",
       videoLink:
         "https://www.tiktok.com/@sxntosyt/video/7486923733001686327?is_from_webapp=1&sender_device=pc",
       views: "97.5K",
