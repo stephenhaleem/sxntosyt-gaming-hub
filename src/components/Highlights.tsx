@@ -35,7 +35,7 @@ const Highlights = () => {
       id: 3,
       title: " Winning 1 Million Naira Content Creator Tournament",
       game: "Call of Duty Mobile",
-      image: "public/images/hqdefault.png",
+      image: "/images/hqdefault.png",
       videoLink: "https://youtu.be/-jsSRM_bHnE?si=ucSjzro4ZsYZ8Vzh",
       views: "16.3K",
       likes: "895",
