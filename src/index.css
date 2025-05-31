@@ -79,21 +79,18 @@
 .follower-hover {
   transform: translate(-50%, -50%) scale(2) !important;
 }
-
 /* Disable custom cursor on touch devices */
 @media (hover: none) and (pointer: coarse) {
   .custom-cursor {
-    display: none;
+    display: none !important;
   }
-}
-
-/* Hide default cursor on interactive elements */
-body,
-a,
-button,
-[role="button"],
-.clickable {
-  cursor: none !important;
+  body,
+  a,
+  button,
+  [role="button"],
+  .clickable {
+    cursor: auto !important;
+  }
 }
 
 /* Ensure cursor is visible on text inputs */

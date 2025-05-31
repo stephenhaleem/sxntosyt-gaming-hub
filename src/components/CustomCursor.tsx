@@ -1,10 +1,20 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+
+const isTouchDevice = () =>
+  typeof window !== "undefined" &&
+  ("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
 const CustomCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
+  const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
+    if (isTouchDevice()) {
+      setShowCursor(false);
+      return;
+    }
+
     const onMouseMove = (event: MouseEvent) => {
       const { clientX, clientY } = event;
 
@@ -45,6 +55,8 @@ const CustomCursor = () => {
       document.removeEventListener("mouseleave", onMouseLeave, true);
     };
   }, []);
+
+  if (!showCursor) return null;
 
   return (
     <>

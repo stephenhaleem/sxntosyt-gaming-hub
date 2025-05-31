@@ -133,7 +133,7 @@ const Social = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {socialLinks.map((social, index) => (
             <a
               key={social.name}
@@ -141,7 +141,7 @@ const Social = () => {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="card-gaming p-6 flex flex-col items-center hover:transform hover:scale-105 transition-all sound-hover relative overflow-hidden group"
+              className="card-gaming p-6 flex flex-col items-center text-center hover:transform hover:scale-105 transition-all sound-hover relative overflow-hidden group"
             >
               {/* Animated background effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-gaming-dark/50 to-black"></div>
@@ -153,18 +153,16 @@ const Social = () => {
               <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-gaming-purple/40"></div>
 
               {/* Content */}
-              <div className="relative z-10">
+              <div className="relative z-10 w-full flex flex-col items-center">
                 <div
-                  className={`social-icon mb-4 bg-gradient-to-br ${social.color}`}
+                  className={`social-icon w-12 h-12 mb-4 rounded-full flex items-center justify-center bg-gradient-to-br ${social.color}`}
                 >
                   <social.icon size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">
                   {social.name}
                 </h3>
-                <p className="text-gray-400 text-center mb-3">
-                  {social.description}
-                </p>
+                <p className="text-gray-400 mb-3">{social.description}</p>
 
                 <div className="flex items-center justify-center gap-1 text-sm text-gray-300 bg-black/30 px-3 py-1 rounded-full">
                   <Users size={12} />
