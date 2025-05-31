@@ -137,12 +137,6 @@ const Hero = () => {
                 className="transform group-hover:translate-x-1 transition-transform"
               />
             </a>
-            <a
-              href="#cod-points"
-              className="border-2 border-gaming-purple bg-gaming-purple/10 text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 hover:bg-gaming-purple/20 hover:-translate-y-1 flex items-center justify-center"
-            >
-              Get COD Points
-            </a>
           </div>
         </div>
       </div>

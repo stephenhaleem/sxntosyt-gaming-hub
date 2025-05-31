@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Instagram } from "lucide-react"; // Add this to your imports at the top
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,19 +23,19 @@ const Social = () => {
   const socialLinks = [
     {
       name: "YouTube",
-      url: "https://youtube.com/@sxntoscodm9949?si=ZNTc0Aa1WqRY3DP2",
+      url: "https://youtube.com/@sxntosyt?si=bWM6h2qaszpqDdb2",
       icon: Youtube,
       color: "from-red-500 to-red-700",
       description: "Gaming videos & highlights",
-      followers: "15.2K",
+      followers: "3.94K",
     },
     {
       name: "Twitch",
       url: "https://www.twitch.tv/sxntosislive",
       icon: Twitch,
       color: "from-purple-500 to-purple-700",
-      description: "Live streams every weekend",
-      followers: "8.7K",
+      description: "Live streams every weekdays and weekends",
+      followers: "100+",
     },
     {
       name: "TikTok",
@@ -42,15 +43,15 @@ const Social = () => {
       icon: Link,
       color: "from-black to-gray-800",
       description: "Short gaming clips",
-      followers: "24.3K",
+      followers: "105.9K",
     },
     {
       name: "Discord",
-      url: "https://discord.gg/cmd8xeWK",
+      url: "https://discord.gg/sb89VQVX",
       icon: MessageSquare,
       color: "from-indigo-500 to-indigo-700",
       description: "Join my gaming community",
-      followers: "5.2K",
+      followers: "",
     },
     {
       name: "Telegram",
@@ -58,7 +59,7 @@ const Social = () => {
       icon: Send,
       color: "from-blue-400 to-blue-600",
       description: "News & updates",
-      followers: "3.1K",
+      followers: "500+",
     },
     {
       name: "WhatsApp",
@@ -67,6 +68,14 @@ const Social = () => {
       color: "from-green-500 to-green-700",
       description: "Fan group",
       followers: "1.8K",
+    },
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/santosfiyin?igsh=eG1hZDljcXdyeDl5&utm_source=qr",
+      icon: Instagram,
+      color: "from-pink-500 to-purple-600",
+      description: "Behind the scenes & updates",
+      followers: "6.9k",
     },
   ];
 
@@ -134,46 +143,53 @@ const Social = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {socialLinks.map((social, index) => (
-            <a
-              key={social.name}
-              ref={(el) => (socialCardsRef.current[index] = el)}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card-gaming p-6 flex flex-col items-center text-center hover:transform hover:scale-105 transition-all sound-hover relative overflow-hidden group"
-            >
-              {/* Animated background effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-gaming-dark/50 to-black"></div>
+          {socialLinks.map((social, index) => {
+            // Center the last card if it's Instagram and it's the last in the array
+            const isLast = index === socialLinks.length - 1;
+            const isInstagram = social.name === "Instagram";
+            return (
+              <a
+                key={social.name}
+                ref={(el) => (socialCardsRef.current[index] = el)}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`card-gaming p-6 flex flex-col items-center text-center hover:transform hover:scale-105 transition-all sound-hover relative overflow-hidden group
+          ${isLast && isInstagram ? "lg:col-start-2" : ""}
+        `}
+              >
+                {/* Animated background effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gaming-dark/50 to-black"></div>
 
-              {/* Military corner marks */}
-              <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-gaming-purple/40"></div>
-              <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-gaming-purple/40"></div>
-              <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-gaming-purple/40"></div>
-              <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-gaming-purple/40"></div>
+                {/* Military corner marks */}
+                <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-gaming-purple/40"></div>
+                <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-gaming-purple/40"></div>
+                <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-gaming-purple/40"></div>
+                <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-gaming-purple/40"></div>
 
-              {/* Content */}
-              <div className="relative z-10 w-full flex flex-col items-center">
-                <div
-                  className={`social-icon w-12 h-12 mb-4 rounded-full flex items-center justify-center bg-gradient-to-br ${social.color}`}
-                >
-                  <social.icon size={24} />
+                {/* Content */}
+                <div className="relative z-10 w-full flex flex-col items-center">
+                  <div
+                    className={`social-icon w-12 h-12 mb-4 rounded-full flex items-center justify-center bg-gradient-to-br ${social.color}`}
+                  >
+                    <social.icon size={24} />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {social.name}
+                  </h3>
+                  <p className="text-gray-400 mb-3">{social.description}</p>
+
+                  <div className="flex items-center justify-center gap-1 text-sm text-gray-300 bg-black/30 px-3 py-1 rounded-full">
+                    <Users size={12} />
+                    <span>{social.followers} followers</span>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">
-                  {social.name}
-                </h3>
-                <p className="text-gray-400 mb-3">{social.description}</p>
 
-                <div className="flex items-center justify-center gap-1 text-sm text-gray-300 bg-black/30 px-3 py-1 rounded-full">
-                  <Users size={12} />
-                  <span>{social.followers} followers</span>
-                </div>
-              </div>
-
-              {/* Hover effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-gaming-purple/10 to-gaming-blue/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </a>
-          ))}
+                {/* Hover effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-gaming-purple/10 to-gaming-blue/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </a>
+            );
+          })}
         </div>
 
         {/* Call to action */}
@@ -181,12 +197,12 @@ const Social = () => {
           <div className="inline-flex items-center gap-2 px-5 py-2 bg-black/50 border border-gaming-purple/30 rounded-full mb-4">
             <Award size={16} className="text-gaming-purple" />
             <span className="text-sm text-gray-300">
-              Join a community of over 50,000 gamers
+              Join a community of over 500 gamers
             </span>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://discord.gg/sxntosyt"
+              href="https://discord.gg/sb89VQVX"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-gaming flex items-center justify-center gap-2"

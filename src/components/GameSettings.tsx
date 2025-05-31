@@ -1,5 +1,5 @@
-import React from "react";
-import { Target, Mouse } from "lucide-react";
+import React, { useState } from "react";
+import { Target, ChevronLeft, ChevronRight } from "lucide-react";
 
 const GameSettings = () => {
   const loadouts = [
@@ -7,39 +7,41 @@ const GameSettings = () => {
       game: "Call of Duty",
       weapons: [
         {
-          name: "M4A1",
+          name: "BY15",
           attachments: [
-            "Monolithic Suppressor",
-            "Commando Foregrip",
-            "60 Round Mags",
+            "Muzzle:Marauder Suppressor",
+            "Barrel:RTC Extended Barrel",
+            "Perk:Sleight of Hand",
+            "Laser:MIP Laser 5mW",
+            "Rear Grip:Stipled Grip Tape",
           ],
-          image: "/images/m4a1.png", // Add your weapon image
+          image: "/images/by.jpg",
+        },
+        {
+          name: "AK117",
+          attachments: [
+            "Laser:OWC Tactical Laser",
+            "Barrel:OWC Marksman",
+            "Underbarrel:Tactical Foregrip B",
+            "Rear Grip:Granulated Grip Tape",
+            "Ammunition:48 Round Extended Mag",
+          ],
+          image: "/images/ak.jpg",
         },
         // Add more weapons as needed
       ],
     },
   ];
 
-  const sensitivitySettings = [
-    {
-      game: "Call of Duty",
-      settings: {
-        dpi: "800",
-        inGameSens: "6.5",
-        adsMultiplier: "1.0",
-        fov: "120",
-      },
-    },
-    {
-      game: "Valorant",
-      settings: {
-        dpi: "800",
-        inGameSens: "0.35",
-        scopedMultiplier: "1.0",
-        fov: "103",
-      },
-    },
-  ];
+  // Carousel state
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const weapons = loadouts[0].weapons;
+  const total = weapons.length;
+
+  const prevWeapon = () =>
+    setCurrentIndex((prev) => (prev === 0 ? total - 1 : prev - 1));
+  const nextWeapon = () =>
+    setCurrentIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
 
   return (
     <section className="py-20 relative overflow-hidden">
@@ -56,60 +58,79 @@ const GameSettings = () => {
         </div>
 
         {/* Game Settings Grid */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* Loadouts Section */}
-          <div className="card-gaming p-6">
+        <div className="flex justify-center">
+          {/* Loadouts Section as Carousel */}
+          <div className="card-gaming p-6 flex flex-col items-center w-full max-w-xl">
             <div className="flex items-center gap-3 mb-6">
               <Target className="text-gaming-purple" size={24} />
               <h3 className="text-xl font-bold text-white">
                 Preferred Loadouts
               </h3>
             </div>
-            {loadouts.map((game) => (
-              <div key={game.game} className="mb-6">
-                <h4 className="text-lg text-gaming-purple mb-4">{game.game}</h4>
-                {game.weapons.map((weapon) => (
-                  <div
-                    key={weapon.name}
-                    className="bg-black/30 rounded-lg p-4 mb-4"
-                  >
-                    <h5 className="text-white font-bold mb-2">{weapon.name}</h5>
+            <h4 className="text-lg text-gaming-purple mb-4">
+              {loadouts[0].game}
+            </h4>
+            <div className="relative w-full flex flex-col items-center">
+              <div className="flex items-center justify-center w-full mb-4">
+                <button
+                  onClick={prevWeapon}
+                  className="p-2 rounded-full bg-black/40 hover:bg-gaming-purple/30 transition-colors"
+                  aria-label="Previous"
+                >
+                  <ChevronLeft size={28} className="text-gaming-purple" />
+                </button>
+                <div className="flex-1 mx-4">
+                  <div className="bg-black/30 rounded-lg p-4 flex flex-col items-center">
+                    {weapons[currentIndex].image && (
+                      <img
+                        src={weapons[currentIndex].image}
+                        alt={weapons[currentIndex].name}
+                        className="w-full h-48 object-cover rounded-lg mb-4"
+                      />
+                    )}
+                    <h5 className="text-white font-bold mb-2">
+                      {weapons[currentIndex].name}
+                    </h5>
                     <ul className="text-gray-400">
-                      {weapon.attachments.map((attachment, index) => (
-                        <li key={index} className="mb-1">
-                          • {attachment}
-                        </li>
-                      ))}
+                      {weapons[currentIndex].attachments.map(
+                        (attachment, idx) => (
+                          <li key={idx} className="mb-1">
+                            • {attachment}
+                          </li>
+                        )
+                      )}
                     </ul>
                   </div>
+                </div>
+                <button
+                  onClick={nextWeapon}
+                  className="p-2 rounded-full bg-black/40 hover:bg-gaming-purple/30 transition-colors"
+                  aria-label="Next"
+                >
+                  <ChevronRight size={28} className="text-gaming-purple" />
+                </button>
+              </div>
+              <div className="flex gap-2 mt-2">
+                {weapons.map((_, idx) => (
+                  <span
+                    key={idx}
+                    className={`w-3 h-3 rounded-full border border-gaming-purple transition-all ${
+                      idx === currentIndex
+                        ? "bg-gaming-purple"
+                        : "bg-transparent"
+                    }`}
+                  />
                 ))}
               </div>
-            ))}
-          </div>
-
-          {/* Sensitivity Settings Section */}
-          <div className="card-gaming p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <Mouse className="text-gaming-purple" size={24} />
-              <h3 className="text-xl font-bold text-white">
-                Sensitivity Settings
-              </h3>
             </div>
-            {sensitivitySettings.map((game) => (
-              <div key={game.game} className="mb-6">
-                <h4 className="text-lg text-gaming-purple mb-4">{game.game}</h4>
-                <div className="bg-black/30 rounded-lg p-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    {Object.entries(game.settings).map(([key, value]) => (
-                      <div key={key} className="flex flex-col">
-                        <span className="text-gray-400 text-sm">{key}</span>
-                        <span className="text-white font-bold">{value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
+            <a
+              href="https://t.me/sxntostoriaba"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-block px-6 py-2 rounded-full bg-gaming-purple text-white font-bold shadow-lg hover:bg-purple-700 transition"
+            >
+              View More
+            </a>
           </div>
         </div>
       </div>

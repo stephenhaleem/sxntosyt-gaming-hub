@@ -12,34 +12,34 @@ const Highlights = () => {
   const highlights = [
     {
       id: 1,
-      title: "20 Kill Victory Royale",
+      title: "Pure Aggression",
       game: "Call of Duty Mobile",
-      image: "/images/Screenshot 2025-05-17 200406.png",
-      videoLink:
-        "https://www.tiktok.com/@sxntosyt/video/7486923733001686327?is_from_webapp=1&sender_device=pc",
-      views: "97.5K",
-      likes: "15.3K",
-      date: "3-28-2025",
+      image: "/images/pureag.png",
+      videoLink: "https://vm.tiktok.com/ZMSrfwU8G/",
+      views: "227.2K",
+      likes: "24.8",
+      date: "4-2",
     },
     {
       id: 2,
-      title: "Insane Clutch Play",
+      title: "The Return",
       game: "Call of Duty Mobile",
-      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
-      videoLink: "#",
+      image: "/images/breaks.png",
+      videoLink:
+        "https://www.instagram.com/reel/DJkGmkwo8ye/?igsh=MWJheWVjZGQwZHhsZA==",
       views: "18.7K",
-      likes: "956",
-      date: "1 week ago",
+      likes: "249",
+      date: "May 12",
     },
     {
       id: 3,
-      title: "Epic Sniper Montage",
+      title: " Winning 1 Million Naira Content Creator Tournament",
       game: "Call of Duty Mobile",
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
-      videoLink: "#",
-      views: "32.2K",
-      likes: "2.4K",
-      date: "2 weeks ago",
+      image: "public/images/hqdefault.png",
+      videoLink: "https://youtu.be/-jsSRM_bHnE?si=ucSjzro4ZsYZ8Vzh",
+      views: "16.3K",
+      likes: "895",
+      date: "Dec 27",
     },
   ];
 
@@ -125,6 +125,8 @@ const Highlights = () => {
                 {/* Play overlay */}
                 <a
                   href={highlight.videoLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
                 >
                   <div className="w-16 h-16 rounded-full bg-gaming-purple/80 flex items-center justify-center transform group-hover:scale-110 transition-transform">
