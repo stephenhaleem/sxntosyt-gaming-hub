@@ -1,5 +1,6 @@
+
 import React, { useEffect, useRef } from "react";
-import { ArrowRight, Target, ShieldAlert, Trophy } from "lucide-react";
+import { ArrowRight, Target, ShieldAlert, Trophy, Zap, Crosshair } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -18,14 +19,14 @@ const Hero = () => {
 
     tl.fromTo(
       titleRef.current,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+      { opacity: 0, y: 50, scale: 0.8 },
+      { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power3.out" }
     )
       .fromTo(
         subtitleRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-        "-=0.4"
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
+        "-=0.6"
       )
       .fromTo(
         ctaRef.current,
@@ -47,8 +48,17 @@ const Hero = () => {
       ease: "none",
     });
 
+    // Continuous floating animation for elements
+    gsap.to(".floating-element", {
+      y: "10px",
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      stagger: 0.3,
+    });
+
     return () => {
-      // Clean up ScrollTrigger when component unmounts
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
@@ -57,93 +67,146 @@ const Hero = () => {
     <section
       ref={heroRef}
       id="home"
-      className="relative min-h-screen flex items-center py-20 pt-24 overflow-hidden"
+      className="relative min-h-screen flex items-center py-20 pt-24 overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
     >
-      {/* COD-Inspired Background */}
+      {/* Enhanced Background with Multiple Layers */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[url('/images/background.jpg')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-gradient-to-t from-gaming-dark via-gaming-dark/80 to-transparent" />
-        <div ref={overlayRef} className="absolute inset-0">
-          {/* Military pattern overlay */}
-          <div
-            className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1561059510-7c9f89a13337')] bg-cover opacity-10 parallax-layer"
-            data-depth="0.2"
-          ></div>
+        {/* Primary Background Image */}
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542751371-adc38448a05e')] bg-cover bg-center opacity-30" />
+        
+        {/* Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/80 via-slate-900/90 to-black/95" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-purple-900/40" />
+        
+        {/* Animated Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.1)_1px,transparent_1px)] bg-[size:50px_50px] animate-pulse" />
+        
+        {/* Floating Particles */}
+        <div className="absolute inset-0">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-purple-400 rounded-full opacity-60 animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 2}s`
+              }}
+            />
+          ))}
         </div>
 
-        {/* Tactical HUD elements */}
-        <div className="absolute top-0 left-0 w-full h-16 border-b border-gaming-purple/20 bg-gradient-to-r from-black/40 to-transparent"></div>
-        <div className="absolute top-20 left-10 w-32 h-32 border-l border-b border-gaming-purple/30 opacity-30"></div>
-        <div className="absolute top-40 right-10 w-40 h-40 border-r border-t border-gaming-purple/30 opacity-30"></div>
-        <div className="absolute bottom-0 left-0 w-full h-16 border-t border-gaming-purple/20 bg-gradient-to-r from-black/40 to-transparent"></div>
+        {/* Enhanced HUD Elements */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+        <div className="absolute top-20 left-10 w-40 h-40 border-2 border-purple-500/30 rounded-lg backdrop-blur-sm bg-black/10 opacity-50 floating-element"></div>
+        <div className="absolute top-40 right-10 w-32 h-32 border-2 border-blue-500/30 rounded-full backdrop-blur-sm bg-black/10 opacity-50 floating-element"></div>
+        <div className="absolute bottom-20 left-20 w-24 h-24 border-2 border-pink-500/30 backdrop-blur-sm bg-black/10 opacity-50 floating-element"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Animated title */}
-          <div ref={titleRef} className="relative">
-            <h1 className="text-5xl md:text-7xl font-futuristic font-bold mb-2 tracking-wider relative">
-              <span className="absolute -inset-1 blur-xl bg-gaming-purple/20 rounded-full"></span>
-              <span className="glow-text">SxntosYT</span>
+        <div className="max-w-6xl mx-auto text-center">
+          {/* Enhanced Main Title */}
+          <div ref={titleRef} className="relative mb-8">
+            <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 opacity-30 rounded-full"></div>
+            <h1 className="relative text-6xl md:text-8xl lg:text-9xl font-futuristic font-black mb-4 tracking-wider">
+              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent drop-shadow-2xl">
+                SxntosYT
+              </span>
             </h1>
 
-            <div className="flex justify-center gap-3 mb-4">
-              <div className="px-3 py-1 bg-gaming-purple/20 backdrop-blur-sm rounded border border-gaming-purple/30 flex items-center gap-1">
-                <Target size={14} className="text-gaming-purple" />
-                <span className="text-sm">PRO PLAYER</span>
+            {/* Enhanced Badges */}
+            <div className="flex flex-wrap justify-center gap-4 mb-6">
+              <div className="group px-4 py-2 bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-md rounded-full border border-purple-400/30 hover:border-purple-400/60 transition-all duration-300 hover:scale-105">
+                <div className="flex items-center gap-2">
+                  <Target size={16} className="text-purple-400 group-hover:text-purple-300" />
+                  <span className="text-sm font-bold text-purple-300 group-hover:text-white">PRO PLAYER</span>
+                  <Crosshair size={14} className="text-purple-400 opacity-60" />
+                </div>
               </div>
-              <div className="px-3 py-1 bg-gaming-blue/20 backdrop-blur-sm rounded border border-gaming-blue/30 flex items-center gap-1">
-                <ShieldAlert size={14} className="text-gaming-blue" />
-                <span className="text-sm">CALL OF DUTY MOBILE</span>
+              <div className="group px-4 py-2 bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-md rounded-full border border-blue-400/30 hover:border-blue-400/60 transition-all duration-300 hover:scale-105">
+                <div className="flex items-center gap-2">
+                  <ShieldAlert size={16} className="text-blue-400 group-hover:text-blue-300" />
+                  <span className="text-sm font-bold text-blue-300 group-hover:text-white">COD MOBILE</span>
+                  <Zap size={14} className="text-blue-400 opacity-60" />
+                </div>
               </div>
             </div>
           </div>
 
-          <div ref={subtitleRef} className="mb-10">
-            <p className="text-xl md:text-2xl mb-2 text-gray-300">
-              Gamer • Streamer • Content Creator
-            </p>
-            <div className="flex justify-center gap-2 mb-4">
-              <Trophy size={18} className="text-yellow-500" />
-              <p className="text-sm text-gray-400">
-                Ranked in Top 1% Regionally
+          {/* Enhanced Subtitle Section */}
+          <div ref={subtitleRef} className="mb-12 floating-element">
+            <div className="bg-gradient-to-r from-black/40 via-purple-900/30 to-black/40 backdrop-blur-xl p-8 rounded-2xl border border-purple-500/20 shadow-2xl">
+              <p className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+                Elite Gamer • Content Creator • Streamer
+              </p>
+              <div className="flex justify-center items-center gap-3 mb-6">
+                <Trophy size={24} className="text-yellow-400" />
+                <p className="text-lg text-purple-200 font-semibold">
+                  Top 1% Regional Ranked Player
+                </p>
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              </div>
+              
+              {/* Enhanced Stats */}
+              <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto">
+                <div className="text-center group">
+                  <div className="text-2xl md:text-3xl font-black text-purple-400 group-hover:text-purple-300 transition-colors">227K+</div>
+                  <div className="text-sm text-gray-300">Views</div>
+                </div>
+                <div className="text-center group">
+                  <div className="text-2xl md:text-3xl font-black text-pink-400 group-hover:text-pink-300 transition-colors">25K+</div>
+                  <div className="text-sm text-gray-300">Followers</div>
+                </div>
+                <div className="text-center group">
+                  <div className="text-2xl md:text-3xl font-black text-blue-400 group-hover:text-blue-300 transition-colors">50+</div>
+                  <div className="text-sm text-gray-300">Wins</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Enhanced Description */}
+          <div ref={ctaRef} className="max-w-3xl mx-auto mb-12">
+            <div className="bg-gradient-to-r from-purple-900/30 via-black/50 to-purple-900/30 backdrop-blur-xl p-6 rounded-xl border border-purple-400/20 floating-element">
+              <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
+                Welcome to my gaming universe! Experience epic gameplay highlights, 
+                join our growing community, and witness legendary moments in Call of Duty Mobile. 
+                Ready to level up together?
               </p>
             </div>
           </div>
 
-          <div
-            ref={ctaRef}
-            className="max-w-2xl mx-auto mb-10 backdrop-blur-sm bg-black/40 p-6 rounded-lg border border-gaming-purple/20 electric-border"
-          >
-            <p className="text-gray-200 mb-4">
-              Welcome to my official gaming headquarters! Check out my gameplay
-              highlights, join my community, and level up with me on this gaming
-              journey.
-            </p>
-
-            <div className="hidden md:block absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-10 h-10">
-              <div className="w-full h-full border-l-2 border-b-2 border-gaming-purple/50 rotate-45"></div>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+          {/* Enhanced CTA Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center gap-6 mt-8">
             <a
               href="#highlights"
-              className="btn-gaming flex items-center justify-center gap-2 group overflow-hidden"
+              className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-purple-500/50"
             >
-              <span>Watch Highlights</span>
-              <ArrowRight
-                size={18}
-                className="transform group-hover:translate-x-1 transition-transform"
-              />
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative flex items-center justify-center gap-3">
+                <span className="text-lg">Watch Epic Highlights</span>
+                <ArrowRight size={20} className="transform group-hover:translate-x-1 transition-transform" />
+              </div>
+            </a>
+            
+            <a
+              href="#social"
+              className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-blue-500/50"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative flex items-center justify-center gap-3">
+                <span className="text-lg">Join Community</span>
+                <Target size={20} className="transform group-hover:rotate-90 transition-transform" />
+              </div>
             </a>
           </div>
         </div>
       </div>
 
-      {/* HUD-style decorative elements */}
-      <div className="absolute bottom-10 left-10 w-40 h-20 border border-gaming-purple/20 bg-black/20 backdrop-blur-sm rounded-lg opacity-50 hidden md:block"></div>
-      <div className="absolute top-40 right-10 w-20 h-40 border border-gaming-blue/20 bg-black/20 backdrop-blur-sm rounded-lg opacity-50 hidden md:block"></div>
+      {/* Enhanced Decorative Elements */}
+      <div className="absolute bottom-10 left-10 w-60 h-32 border border-purple-400/20 bg-gradient-to-r from-purple-900/20 to-transparent backdrop-blur-sm rounded-lg opacity-60 hidden lg:block floating-element"></div>
+      <div className="absolute top-1/3 right-10 w-32 h-60 border border-blue-400/20 bg-gradient-to-b from-blue-900/20 to-transparent backdrop-blur-sm rounded-lg opacity-60 hidden lg:block floating-element"></div>
     </section>
   );
 };
