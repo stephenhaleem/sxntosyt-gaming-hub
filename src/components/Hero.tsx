@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from "react";
 import { ArrowRight, Target, ShieldAlert, Trophy } from "lucide-react";
 import gsap from "gsap";
@@ -134,7 +135,7 @@ const Hero = () => {
               <span>Watch Highlights</span>
               <ArrowRight
                 size={18}
-                className="transform group-hover:translate-x-1 transition-transform"
+                className="transform group-hover:translate-x-2 transition-transform duration-300 ease-out animate-pulse"
               />
             </a>
           </div>
