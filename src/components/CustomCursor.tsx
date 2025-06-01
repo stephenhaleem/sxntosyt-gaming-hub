@@ -30,16 +30,24 @@ const CustomCursor = () => {
     };
 
     const onMouseEnter = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (target.closest('button, a, [role="button"], .clickable')) {
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        typeof target.closest === "function" &&
+        target.closest('button, a, [role="button"], .clickable')
+      ) {
         cursorRef.current?.classList.add("cursor-hover");
         followerRef.current?.classList.add("follower-hover");
       }
     };
 
     const onMouseLeave = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (target.closest('button, a, [role="button"], .clickable')) {
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        typeof target.closest === "function" &&
+        target.closest('button, a, [role="button"], .clickable')
+      ) {
         cursorRef.current?.classList.remove("cursor-hover");
         followerRef.current?.classList.remove("follower-hover");
       }

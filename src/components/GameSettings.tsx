@@ -45,7 +45,10 @@ const GameSettings = () => {
 
   return (
     <section className="py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-gaming-dark/90 to-black"></div>
+      {/* Background image */}
+      <div className="absolute inset-0 bg-[url('/images/background.jpg')] bg-cover bg-center opacity-1 pointer-events-none"></div>
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-gaming-dark/40 to-black"></div>
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">

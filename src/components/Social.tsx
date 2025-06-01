@@ -63,11 +63,11 @@ const Social = () => {
     },
     {
       name: "WhatsApp",
-      url: "https://chat.whatsapp.com/JIlx4cEeCPj6lxC3kWYjwI",
+      url: "https://chat.whatsapp.com/KbnI1XQ4NHKGBi4H0dwFmV",
       icon: Phone,
       color: "from-green-500 to-green-700",
       description: "Fan group",
-      followers: "1.8K",
+      followers: "500+",
     },
     {
       name: "Instagram",
@@ -142,7 +142,7 @@ const Social = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {socialLinks.map((social, index) => {
             // Center the last card if it's Instagram and it's the last in the array
             const isLast = index === socialLinks.length - 1;
@@ -155,7 +155,7 @@ const Social = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`card-gaming p-6 flex flex-col items-center text-center hover:transform hover:scale-105 transition-all sound-hover relative overflow-hidden group
-          ${isLast && isInstagram ? "lg:col-start-2" : ""}
+          ${isLast && isInstagram ? "xl:col-start-2" : ""}
         `}
               >
                 {/* Animated background effect */}
@@ -181,7 +181,11 @@ const Social = () => {
 
                   <div className="flex items-center justify-center gap-1 text-sm text-gray-300 bg-black/30 px-3 py-1 rounded-full">
                     <Users size={12} />
-                    <span>{social.followers} followers</span>
+                    <span>
+                      {["WhatsApp", "Telegram"].includes(social.name)
+                        ? `${social.followers} members`
+                        : `${social.followers} followers`}
+                    </span>
                   </div>
                 </div>
 

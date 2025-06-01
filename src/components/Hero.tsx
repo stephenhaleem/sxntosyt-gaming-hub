@@ -61,7 +61,7 @@ const Hero = () => {
     >
       {/* COD-Inspired Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[url('/images/background.jpg')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url('/images/call_of_duty_7-wallpaper-1920x1080.jpg')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-gradient-to-t from-gaming-dark via-gaming-dark/80 to-transparent" />
         <div ref={overlayRef} className="absolute inset-0">
           {/* Military pattern overlay */}

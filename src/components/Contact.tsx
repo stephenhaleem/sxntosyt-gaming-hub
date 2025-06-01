@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import {
   Send,
@@ -10,8 +10,13 @@ import {
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import emailjs from "@emailjs/browser";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const SERVICE_ID = "service_hqxxkyg";
+const TEMPLATE_ID = "template_z9jaqto";
+const PUBLIC_KEY = "zXy772hm1iXlYHFr3";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -20,11 +25,10 @@ const Contact = () => {
     subject: "",
     message: "",
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  const formRef = useRef(null);
-  const titleRef = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -33,36 +37,49 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulating form submission
-    setTimeout(() => {
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        PUBLIC_KEY
+      );
       toast({
         title: "Message sent!",
         description: "Thanks for reaching out. I'll get back to you soon!",
       });
-
       setFormData({
         name: "",
         email: "",
         subject: "",
         message: "",
       });
-
+    } catch (error) {
+      toast({
+        title: "Message not sent",
+        description:
+          "There was an error sending your message. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   useEffect(() => {
     // Title animation
     gsap.fromTo(
       titleRef.current,
-      {
-        opacity: 0,
-        y: 30,
-      },
+      { opacity: 0, y: 30 },
       {
         opacity: 1,
         y: 0,
@@ -74,27 +91,6 @@ const Contact = () => {
         },
       }
     );
-
-    // Form animation
-    gsap.fromTo(
-      formRef.current,
-      {
-        opacity: 0,
-        y: 50,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        delay: 0.3,
-        scrollTrigger: {
-          trigger: formRef.current,
-          start: "top 80%",
-        },
-      }
-    );
-
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
@@ -103,13 +99,11 @@ const Contact = () => {
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
       {/* Tactical background */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d')] bg-cover bg-center opacity-5"></div>
-
+      <div className="absolute inset-0 bg-[url('/images/sofia.jpg')] bg-cover bg-center opacity-1"></div>
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/95 to-black/90"></div>
-
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/90"></div>
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section header with military style */}
+        {/* Section header */}
         <div ref={titleRef} className="relative mb-16 text-center">
           <div className="inline-block px-6 py-2 border border-gaming-purple/30 rounded-full bg-black/50 backdrop-blur-sm mb-4">
             <span className="text-gaming-purple font-futuristic tracking-widest text-sm">
@@ -117,25 +111,20 @@ const Contact = () => {
             </span>
           </div>
           <h2 className="section-title">Get In Touch</h2>
-
-          {/* Tactical decorative elements */}
           <div className="hidden md:block absolute left-1/4 top-1/2 -translate-y-1/2 w-32 h-px bg-gradient-to-r from-transparent to-gaming-purple/30"></div>
           <div className="hidden md:block absolute right-1/4 top-1/2 -translate-y-1/2 w-32 h-px bg-gradient-to-l from-transparent to-gaming-purple/30"></div>
         </div>
-
-        <div ref={formRef} className="max-w-3xl mx-auto relative">
+        <div className="max-w-3xl mx-auto relative">
           {/* Tactical corner elements */}
           <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-gaming-purple/30"></div>
           <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-gaming-purple/30"></div>
           <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-gaming-purple/30"></div>
           <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-gaming-purple/30"></div>
-
           <div className="card-gaming p-8 relative bg-gradient-to-b from-gaming-dark/90 to-black backdrop-blur-md">
             {/* HUD-style elements */}
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gaming-purple/40 to-transparent"></div>
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gaming-purple/40 to-transparent"></div>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="relative">
                   <label
@@ -157,7 +146,6 @@ const Contact = () => {
                   <div className="absolute top-[38px] left-0 h-[calc(100%-38px)] w-px bg-gaming-purple/20"></div>
                   <div className="absolute bottom-0 left-0 w-[calc(100%-1px)] h-px bg-gaming-purple/20"></div>
                 </div>
-
                 <div className="relative">
                   <label
                     htmlFor="email"
@@ -179,7 +167,6 @@ const Contact = () => {
                   <div className="absolute bottom-0 right-0 w-[calc(100%-1px)] h-px bg-gaming-purple/20"></div>
                 </div>
               </div>
-
               <div className="relative">
                 <label
                   htmlFor="subject"
@@ -198,7 +185,6 @@ const Contact = () => {
                   className="w-full bg-black/50 border border-gaming-purple/30 rounded-md p-3 text-white focus:outline-none focus:border-gaming-purple transition-all"
                 />
               </div>
-
               <div className="relative">
                 <label
                   htmlFor="message"
@@ -220,13 +206,11 @@ const Contact = () => {
                   className="w-full bg-black/50 border border-gaming-purple/30 rounded-md p-3 text-white focus:outline-none focus:border-gaming-purple transition-all"
                 ></textarea>
               </div>
-
               <div className="flex justify-between items-center">
                 <div className="flex items-center text-sm text-gray-400">
                   <ShieldCheck size={14} className="mr-1 text-gaming-purple" />
                   Your information is secure
                 </div>
-
                 <button
                   type="submit"
                   className={`btn-gaming min-w-[150px] flex items-center justify-center gap-2 ${
