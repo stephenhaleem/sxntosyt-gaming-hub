@@ -47,7 +47,7 @@ const Social = () => {
     },
     {
       name: "Discord",
-      url: "https://discord.gg/sb89VQVX",
+      url: "https://discord.com/invite/baG2NQcS",
       icon: MessageSquare,
       color: "from-indigo-500 to-indigo-700",
       description: "Join my gaming community",

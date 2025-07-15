@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from "react";
 import { ArrowRight, Target, ShieldAlert, Trophy } from "lucide-react";
 import gsap from "gsap";
